@@ -4,13 +4,17 @@ import java.util.ArrayList;
 
 public class Product {
 	
-	public static ArrayList<String> arr = new ArrayList<>();
+	public static ArrayList<Product> listOfProducts = new ArrayList<>();
 	
+	public String id;
 	public String name;
-	int id;
+	public String count;
 	
-	public Product(String name) {
+	public Product(String id,String name,String count) {
+		this.id = id;
 		this.name = name;
+		this.count = count;
+		
+		listOfProducts.add(this);	
 	}
-	
 }

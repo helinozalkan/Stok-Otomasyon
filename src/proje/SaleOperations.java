@@ -1,7 +1,6 @@
 package proje;
 
 import java.awt.EventQueue;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,12 +12,12 @@ import modeller.Product;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class ProductList extends JFrame {
+public class SaleOperations extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
 	private JButton btnNewButton;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -27,7 +26,7 @@ public class ProductList extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProductList frame = new ProductList();
+					SaleOperations frame = new SaleOperations();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,31 +38,14 @@ public class ProductList extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProductList() {
+	public SaleOperations() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 535, 517);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 10, 218, 251);
-		contentPane.add(scrollPane);
-		
-		var model = new DefaultTableModel();
-		Object[] col = {"Ürün"};
-		model.setColumnIdentifiers(col);
-
-		for (String i : Product.arr) {
-			model.addRow(new String[] {i});
-		}
-
-		
-		
-		table = new JTable(model);
-		scrollPane.setViewportView(table);
 		
 		btnNewButton = new JButton("Geri Dön");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -73,8 +55,36 @@ public class ProductList extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(324, 21, 89, 23);
+		btnNewButton.setBounds(10, 11, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		
+		var Tablomodel = new DefaultTableModel();
+		Object[] col = {"ID","Ürün","Miktar"};
+		Tablomodel.setColumnIdentifiers(col);
+		for (Product product : Product.listOfProducts) {
+			Tablomodel.addRow(new String[] {product.id,product.name,product.count});
+		}
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(183, 0, 326, 478);
+		contentPane.add(scrollPane);
+		
+		table = new JTable(Tablomodel);
+		scrollPane.setViewportView(table);
+		
+//		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				ProductID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+//				ProductName.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+//				ProductCount.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+//			}
+//			
+//		});
+		
 		
 		
 	}
