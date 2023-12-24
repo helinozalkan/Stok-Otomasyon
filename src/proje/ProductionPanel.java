@@ -73,7 +73,7 @@ public class ProductionPanel extends JFrame {
 		Label_UrunEkle_1_1.setBounds(28, 196, 93, 30);
 		contentPane.add(Label_UrunEkle_1_1);
 		
-		JLabel lbIDUyarı = new JLabel("");
+		final JLabel lbIDUyarı = new JLabel("");
 		lbIDUyarı.setForeground(Color.RED);
 		lbIDUyarı.setHorizontalAlignment(SwingConstants.CENTER);
 		lbIDUyarı.setBounds(52, 103, 218, 23);
@@ -86,7 +86,7 @@ public class ProductionPanel extends JFrame {
 		contentPane.add(lblUrunAdı);
 		
 		
-		JLabel lblAdet = new JLabel("");
+		final JLabel lblAdet = new JLabel("");
 		lblAdet.setForeground(Color.RED);
 		lblAdet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdet.setBounds(52, 225, 218, 23);
@@ -112,7 +112,6 @@ public class ProductionPanel extends JFrame {
 		ProductID.setBounds(145, 74, 125, 30);
 		contentPane.add(ProductID);
 		ProductID.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
             public void insertUpdate(DocumentEvent e) {
             	try {
 					Integer.parseInt(ProductID.getText());
@@ -122,7 +121,6 @@ public class ProductionPanel extends JFrame {
 				}
             }
 
-            @Override
             public void removeUpdate(DocumentEvent e) {
             	try {
 					Integer.parseInt(ProductID.getText());
@@ -132,7 +130,6 @@ public class ProductionPanel extends JFrame {
 				}
             }
 
-			@Override
 			public void changedUpdate(DocumentEvent e) {
 				// Auto-generated method stub
 				// No use with text box
@@ -150,7 +147,6 @@ public class ProductionPanel extends JFrame {
 		ProductCount.setBounds(145, 196, 125, 30);
 		contentPane.add(ProductCount);
 		ProductCount.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
             public void insertUpdate(DocumentEvent e) {
             	try {
 					Integer.parseInt(ProductCount.getText());
@@ -160,7 +156,6 @@ public class ProductionPanel extends JFrame {
 				}
             }
 
-            @Override
             public void removeUpdate(DocumentEvent e) {
             	try {
 					Integer.parseInt(ProductCount.getText());
@@ -170,7 +165,6 @@ public class ProductionPanel extends JFrame {
 				}
             }
 
-			@Override
 			public void changedUpdate(DocumentEvent e) {
 				// Auto-generated method stub
 				// No use with text box
@@ -269,4 +263,5 @@ public class ProductionPanel extends JFrame {
 		
 
 	}
+	
 }

@@ -53,7 +53,7 @@ public class AdminPanel extends JFrame {
 		btnNewButton_1.setBounds(20, 160, 194, 48);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Kullanıcı Bilgileri");
+		JButton btnNewButton_1_1 = new JButton("Satış İşlemleri");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserInformation ui = new UserInformation();
@@ -64,7 +64,7 @@ public class AdminPanel extends JFrame {
 		btnNewButton_1_1.setBounds(20, 233, 194, 48);
 		contentPane.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1_2 = new JButton("Satış İşlemleri");
+		JButton btnNewButton_1_2 = new JButton("Stok Durumu");
 		btnNewButton_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SaleOperations panel = new SaleOperations();

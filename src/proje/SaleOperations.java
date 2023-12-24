@@ -12,6 +12,7 @@ import modeller.Product;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 public class SaleOperations extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -42,12 +43,14 @@ public class SaleOperations extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 535, 517);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 153, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnNewButton = new JButton("Geri Dön");
+		btnNewButton.setBackground(new Color(204, 204, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel aPanel = new AdminPanel();
@@ -88,5 +91,6 @@ public class SaleOperations extends JFrame {
 		
 		
 	}
+	
 
 }

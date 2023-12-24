@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -18,7 +19,7 @@ public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -73,10 +74,11 @@ public class Login extends JFrame {
 		textField.setBounds(170, 57, 112, 20);
 		panel.add(textField);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(170, 89, 112, 20);
-		panel.add(textField_1);
+		passwordField = new JPasswordField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(170, 89, 112, 20);
+		panel.add(passwordField);
+		
 		
 		JLabel Label_Isim = new JLabel("İsim");
 		Label_Isim.setHorizontalAlignment(SwingConstants.CENTER);
@@ -102,4 +104,7 @@ public class Login extends JFrame {
 
 		
 	}
+	
+	
+
 }

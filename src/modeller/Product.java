@@ -1,5 +1,6 @@
 package modeller;
 
+
 import java.util.ArrayList;
 
 public class Product {
