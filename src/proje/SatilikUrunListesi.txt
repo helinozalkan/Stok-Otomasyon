@@ -1,0 +1,9 @@
+0,Gevrek,20
+1,Domates,50
+2,Süt,10
+3,Ekmek,30
+4,Yumurta,60
+5,Patates,40
+6,Makarna,25
+7,Salatalık,35
+8,Cips,15

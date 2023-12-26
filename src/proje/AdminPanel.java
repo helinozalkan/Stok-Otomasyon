@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AdminPanel extends JFrame {
 
@@ -37,12 +38,14 @@ public class AdminPanel extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Ürün ekle");
+		JButton btnNewButton_1 = new JButton("ÜRÜN EKLE");
+		btnNewButton_1.setBackground(new Color(153, 153, 204));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ProductionPanel productionPanel = new ProductionPanel();
@@ -53,10 +56,11 @@ public class AdminPanel extends JFrame {
 		btnNewButton_1.setBounds(20, 160, 194, 48);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Satış İşlemleri");
+		JButton btnNewButton_1_1 = new JButton("SATIŞ İŞLEMLERİ");
+		btnNewButton_1_1.setBackground(new Color(153, 153, 204));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserInformation ui = new UserInformation();
+				SatisIslemleri ui = new SatisIslemleri();
 				ui.setVisible(true);
 				dispose();
 			}
@@ -64,7 +68,8 @@ public class AdminPanel extends JFrame {
 		btnNewButton_1_1.setBounds(20, 233, 194, 48);
 		contentPane.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1_2 = new JButton("Stok Durumu");
+		JButton btnNewButton_1_2 = new JButton("STOK DURUMU");
+		btnNewButton_1_2.setBackground(new Color(153, 153, 204));
 		btnNewButton_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SaleOperations panel = new SaleOperations();
@@ -76,7 +81,8 @@ public class AdminPanel extends JFrame {
 		btnNewButton_1_2.setBounds(250, 160, 194, 48);
 		contentPane.add(btnNewButton_1_2);
 		
-		JButton btnNewButton_1_3 = new JButton("Çıkış Yap");
+		JButton btnNewButton_1_3 = new JButton("ÇIKIŞ YAP");
+		btnNewButton_1_3.setBackground(new Color(153, 153, 204));
 		btnNewButton_1_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login = new Login();

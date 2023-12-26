@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import modeller.Product;
@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 public class SaleOperations extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -43,14 +45,14 @@ public class SaleOperations extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 535, 517);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(153, 153, 204));
+		contentPane.setBackground(new Color(255, 255, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnNewButton = new JButton("Geri Dön");
-		btnNewButton.setBackground(new Color(204, 204, 255));
+		btnNewButton.setBackground(new Color(153, 153, 204));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel aPanel = new AdminPanel();
@@ -61,19 +63,14 @@ public class SaleOperations extends JFrame {
 		btnNewButton.setBounds(10, 11, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		
-		var Tablomodel = new DefaultTableModel();
-		Object[] col = {"ID","Ürün","Miktar"};
-		Tablomodel.setColumnIdentifiers(col);
-		for (Product product : Product.listOfProducts) {
-			Tablomodel.addRow(new String[] {product.id,product.name,product.count});
-		}
-		
+        TableModel Tablomodel = Product.Initalize();
+        
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(183, 0, 326, 478);
+		scrollPane.setBounds(121, 11, 329, 450);
 		contentPane.add(scrollPane);
 		
 		table = new JTable(Tablomodel);
+		table.setEnabled(false);
 		scrollPane.setViewportView(table);
 		
 //		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
