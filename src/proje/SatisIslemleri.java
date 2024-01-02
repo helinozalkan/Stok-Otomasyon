@@ -2,6 +2,8 @@ package proje;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -28,12 +30,11 @@ public class SatisIslemleri extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
     private JTable table;
-    private JTextField ProductID;
     private JTextField ProductName;
     private JTextField ProductCount;
     private JLabel DurumBildirimi;
 
-    private static void main(String[] args) {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 SatisIslemleri frame = new SatisIslemleri();
@@ -52,40 +53,25 @@ public class SatisIslemleri extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JButton btnGeri = new JButton("Geri git");
-        btnGeri.setBackground(new Color(153, 153, 204));
-        btnGeri.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e) {
-        		AdminPanel adminPanel = new AdminPanel();
-        		adminPanel.setVisible(true);
-        		dispose();
-        	}
-            // Geri git işlemleri buraya eklenmeli
-            
-        });
-        btnGeri.setBounds(10, 11, 89, 23);
-        contentPane.add(btnGeri);
 		
         TableModel Tablomodel = new DefaultTableModel();
 		// ----- Tablo Kodları
 		List<String> liste = null; // Declare the list outside the try block
 		
 		try {
-			// Read lines from the file
+			// Ürün listesinden satırları okuma
 			liste = Files.readAllLines(Paths.get("C:\\Users\\lupus\\AppData\\Local\\SceneBuilder\\Stok-Otomasyon.git\\src\\proje\\SatilikUrunListesi.txt"));
 		} catch (IOException e) {
-			// Handle exceptions, e.g., file not found or unable to read
 			e.printStackTrace();
 		}
 		
-		// Check if the list is not null before proceeding
+		// Sütün adlarını ayarlama
 		if (liste != null) {
 			Object[] col = {"ID", "Ürün", "Miktar"};
 			((DefaultTableModel) Tablomodel).setColumnIdentifiers(col);
 			
 			for (String product : liste) {
-				// Split each line and add the parts to the table model
+				// Ürün Listesindeki ürünleri "," işareti göre ayırıp tabloya atama
 				String[] p = product.split(",");
 				((DefaultTableModel) Tablomodel).addRow(new String[] {p[0],p[1],p[2]});
 			}
@@ -104,7 +90,6 @@ public class SatisIslemleri extends JFrame {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				ProductID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 				ProductName.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
 				ProductCount.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
 			}
@@ -118,11 +103,48 @@ public class SatisIslemleri extends JFrame {
         ProductCount = new JTextField();
         ProductCount.setBounds(140, 205, 150, 30);
         contentPane.add(ProductCount);
+		ProductCount.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+            	try {
+					Integer.parseInt(ProductCount.getText());
+					DurumBildirimi.setText("");
+				} catch (NumberFormatException e2) {
+					DurumBildirimi.setText("Geçerli bir sayı girin");
+				}
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+            	try {
+					Integer.parseInt(ProductCount.getText());
+					DurumBildirimi.setText("");
+				} catch (NumberFormatException e2) {
+					DurumBildirimi.setText("Geçerli bir sayı girin");
+				}
+            }
+
+			public void changedUpdate(DocumentEvent e) {
+				// Auto-generated method stub
+				// No use with text box
+			}
+        });
+
 
         DurumBildirimi = new JLabel("");
+        DurumBildirimi.setForeground(new Color(255, 0, 0));
         DurumBildirimi.setHorizontalAlignment(SwingConstants.CENTER);
         DurumBildirimi.setBounds(53, 106, 200, 20);
         contentPane.add(DurumBildirimi);
+        
+        JLabel lblNewLabel = new JLabel("Ürün İsmi");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setBounds(10, 145, 100, 22);
+        contentPane.add(lblNewLabel);
+        
+        JLabel lblNewLabel_1 = new JLabel("Miktar");
+        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_1.setBounds(10, 213, 89, 14);
+        contentPane.add(lblNewLabel_1);
+        
         JButton btnAdd = new JButton("Satışı Ekle");
         btnAdd.setBackground(new Color(153, 153, 204));
         btnAdd.addActionListener(new ActionListener() {
@@ -132,24 +154,24 @@ public class SatisIslemleri extends JFrame {
 					DurumBildirimi.setText("Boş bırakma");
 					return;
 				}
+				// Ürünün bulunup bulunmadığına dair bir değer
 				var found = false;
-		        // Example: Value to compare against
+				// Listedeki bütün ürünleri karşılaştırmak için for döngüsü
 		        for (int i = 0; i < Product.Initalize().getRowCount(); i++) {
-		            // Get the value in the "productname" column for the current row
+		        	// Bu satırdaki ürün adını bir değere atama
 		            var productNameValue = Product.Initalize().getValueAt(i, 1);
 
-		            // Compare the value with x
+		            // Ürün adının bizim istediğimiz ürün ile aynı olup olmadığını kontrol etme
 		            if (productNameValue != null && productNameValue.equals(ProductName.getText())) {
-		                // Do something when the condition is met
+		                // Eğer doğru ise ürün miktarını girilen miktar kadar arttırma
 		            	var currentValue = Product.Initalize().getValueAt(i, 2);
 		            	if (currentValue instanceof Integer) {
 		                    int intValue = (Integer) currentValue;
-		                    intValue -= Integer.parseInt(ProductCount.getText()); // Decrease the value by count
+		                    intValue -= Integer.parseInt(ProductCount.getText()); // Ürünün miktarını düşür
 		                    Product.Initalize().setValueAt(intValue, i, 2);
 		                }
 		            	else {
 		            		Product.Initalize().setValueAt(Integer.parseInt((String) currentValue) - Integer.parseInt(ProductCount.getText()), i, 2);
-		            		// Perform your action here
 						}
 		            	
 		            	currentValue = Tablomodel.getValueAt(i, 2);
@@ -160,7 +182,6 @@ public class SatisIslemleri extends JFrame {
 		                }
 		            	else {
 		            		Tablomodel.setValueAt(Integer.parseInt((String) currentValue) + Integer.parseInt(ProductCount.getText()), i, 2);
-		            		// Perform your action here
 						}
 		            	
 		            	found = true;							
@@ -168,7 +189,7 @@ public class SatisIslemleri extends JFrame {
 		            }
 		        }
 		        if (!found) {
-		        	// Uyarı Çıkıcak
+		        	DurumBildirimi.setText("Yanlış ürün ismi");
 				}
 			}
         });
@@ -186,7 +207,6 @@ public class SatisIslemleri extends JFrame {
         btnClear.setBackground(new Color(153, 153, 204));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ProductID.setText(String.valueOf(c[0]));
 				ProductName.setText("");
 				ProductCount.setText("");
 				
@@ -194,15 +214,5 @@ public class SatisIslemleri extends JFrame {
         });
         btnClear.setBounds(28, 318, 100, 30);
         contentPane.add(btnClear);
-        
-        JLabel lblNewLabel = new JLabel("Ürün İsmi");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setBounds(10, 145, 100, 22);
-        contentPane.add(lblNewLabel);
-        
-        JLabel lblNewLabel_1 = new JLabel("Miktar");
-        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_1.setBounds(10, 213, 89, 14);
-        contentPane.add(lblNewLabel_1);
     }
 }

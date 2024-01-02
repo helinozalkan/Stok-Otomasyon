@@ -23,23 +23,22 @@ public class Product {
 		if (isFirst) {
 			
 			// ----- Tablo Kodları
-			List<String> liste = null; // Declare the list outside the try block
+			List<String> liste = null;
 			
 			try {
-				// Read lines from the file
+				// Ürün listesinden satırları okuma
 				liste = Files.readAllLines(Paths.get("C:\\Users\\lupus\\AppData\\Local\\SceneBuilder\\Stok-Otomasyon.git\\src\\proje\\ÜrünListesi.txt"));
 			} catch (IOException e) {
-				// Handle exceptions, e.g., file not found or unable to read
 				e.printStackTrace();
 			}
 			
-			// Check if the list is not null before proceeding
 			if (liste != null) {
+				// Sütün adlarını ayarlama
 				Object[] col = {"ID", "Ürün", "Miktar"};
 				((DefaultTableModel) Tablomodel).setColumnIdentifiers(col);
 				
 				for (String product : liste) {
-					// Split each line and add the parts to the table model
+					// Ürün Listesindeki ürünleri "," işareti göre ayırıp tabloya atama
 					String[] p = product.split(",");
 					((DefaultTableModel) Tablomodel).addRow(new String[] {p[0],p[1],p[2]});
 				}

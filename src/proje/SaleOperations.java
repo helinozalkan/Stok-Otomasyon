@@ -22,9 +22,7 @@ public class SaleOperations extends JFrame {
 	private JButton btnNewButton;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,9 +36,7 @@ public class SaleOperations extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public SaleOperations() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 535, 517);
@@ -63,6 +59,7 @@ public class SaleOperations extends JFrame {
 		btnNewButton.setBounds(10, 11, 89, 23);
 		contentPane.add(btnNewButton);
 		
+		// Güncel tabloyu Product sınıfından çek ve göster
         TableModel Tablomodel = Product.Initalize();
         
 		JScrollPane scrollPane = new JScrollPane();
@@ -71,23 +68,6 @@ public class SaleOperations extends JFrame {
 		
 		table = new JTable(Tablomodel);
 		table.setEnabled(false);
-		scrollPane.setViewportView(table);
-		
-//		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				ProductID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-//				ProductName.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
-//				ProductCount.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
-//			}
-//			
-//		});
-		
-		
-		
+		scrollPane.setViewportView(table);	
 	}
-	
-
 }

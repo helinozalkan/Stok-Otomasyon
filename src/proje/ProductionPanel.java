@@ -106,6 +106,14 @@ public class ProductionPanel extends JFrame {
 		
 		// -----
 
+		int[] c = {Product.Initalize().getRowCount()};
+		
+		ProductID = new JTextField();
+		ProductID.setEditable(false);
+		ProductID.setColumns(10);
+		ProductID.setBounds(145, 74, 125, 30);
+		contentPane.add(ProductID);
+		ProductID.setText(String.valueOf(c[0]));
 
 		ProductName = new JTextField();
 		ProductName.setColumns(10);
@@ -139,7 +147,6 @@ public class ProductionPanel extends JFrame {
 				// Auto-generated method stub
 				// No use with text box
 			}
-
         });
 		
 		// ----- Tablo Kodları		
@@ -147,66 +154,55 @@ public class ProductionPanel extends JFrame {
 		scrollPane.setBounds(345, 11, 329, 450);
 		contentPane.add(scrollPane);
 		
+		// Güncel tabloyu Product sınıfından getir
 		table = new JTable(Product.Initalize());
 		scrollPane.setViewportView(table);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				ProductID.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 				ProductName.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
 				ProductCount.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
 			}
-			
 		});
 		
-		// ----- Tablo Kodu Son
-		
-		int[] c = {Product.Initalize().getRowCount()};
-
-		ProductID = new JTextField();
-		ProductID.setEditable(false);
-		ProductID.setColumns(10);
-		ProductID.setBounds(145, 74, 125, 30);
-		contentPane.add(ProductID);
-		ProductID.setText(String.valueOf(c[0]));
 		// ----- Butonlar
 		
 		JButton btnAdd = new JButton("Ekle");
 		btnAdd.setBackground(new Color(153, 153, 204));
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Ürün ismi ve adeti boş ise uyarı veren kod
+				// Ürün ismi ve adeti, boş ise uyarı veren kod
 				if (ProductName.getText().equals("") || ProductCount.getText().equals("")) {
 					DurumBildirimi.setText("Boş bırakma");
 					return;
 				}
+				// Ürünün bulunup bulunmadığına dair bir değer
 				var found = false;
-		        // Example: Value to compare against
+				// Listedeki bütün ürünleri karşılaştırmak için for döngüsü
 		        for (int i = 0; i < Product.Initalize().getRowCount(); i++) {
-		            // Get the value in the "productname" column for the current row
+		            // Bu satırdaki ürün adını bir değere atama
 		            var productNameValue = Product.Initalize().getValueAt(i, 1);
 
-		            // Compare the value with x
+		            // Ürün adının bizim istediğimiz ürün ile aynı olup olmadığını kontrol etme
 		            if (productNameValue != null && productNameValue.equals(ProductName.getText())) {
-		                // Do something when the condition is met
+		                // Eğer doğru ise ürün miktarını girilen miktar kadar arttırma
 		            	var currentValue = Product.Initalize().getValueAt(i, 2);
 		            	if (currentValue instanceof Integer) {
 		                    int intValue = (Integer) currentValue;
-		                    intValue += Integer.parseInt(ProductCount.getText()); // Decrease the value by count
+		                    intValue += Integer.parseInt(ProductCount.getText());
 		                    Product.Initalize().setValueAt(intValue, i, 2);
 		                }
 		            	else {
 		            		Product.Initalize().setValueAt(Integer.parseInt((String) currentValue) + Integer.parseInt(ProductCount.getText()), i, 2);
-		            		// Perform your action here
 						}
 		            	found = true;							
 		            	break;
 		            }
 		        }
 		        if (!found) {
-		        	// Ürünü ismi ve adetini tabloya ekleyen kod
+		        	// Eğer ürün bulunmadyısa yeni ürünü ve adetini tabloya ekleyen kod
 		        	Product product = new Product(ProductID.getText(),ProductName.getText(),ProductCount.getText());
 		        	DurumBildirimi.setText("Ürün Eklendi");	
 		        	((DefaultTableModel) Product.Initalize()).addRow(new String[] {product.id,product.name,product.count});
@@ -219,10 +215,12 @@ public class ProductionPanel extends JFrame {
 		btnAdd.setBounds(170, 318, 100, 30);
 		contentPane.add(btnAdd);
 		
+		// Geri dön tuşu
 		btnGeri = new JButton("Geri Dön");
 		btnGeri.setBackground(new Color(153, 153, 204));
 		btnGeri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Yeni sayfayı aç ve şuan ki sayfayı kapa
 				AdminPanel aPanel = new AdminPanel();
 				aPanel.setVisible(true);
 				dispose();
@@ -245,6 +243,7 @@ public class ProductionPanel extends JFrame {
 //		btnCikar.setBounds(28, 318, 100, 30);
 //		contentPane.add(btnCikar);
 		
+		// Temizle butonu temizliyor
 		JButton btnClear = new JButton("Temizle");
 		btnClear.setBackground(new Color(153, 153, 204));
 		btnClear.addActionListener(new ActionListener() {

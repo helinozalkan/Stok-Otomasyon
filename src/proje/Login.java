@@ -25,9 +25,6 @@ public class Login extends JFrame {
 	private JTextField textName;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,11 +37,9 @@ public class Login extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public Login() {
+		// --- Pencere ayarları
 		setBackground(SystemColor.infoText);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\lupus\\AppData\\Local\\SceneBuilder\\Stok-Otomasyon.git\\src\\proje\\packages.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,13 +59,8 @@ public class Login extends JFrame {
 		panel.setBackground(new Color(255, 255, 204));
 		panel.setLayout(null);
 		tabbedPane.addTab("Admin", null, panel, null);
-		
-		
-		JLabel lblNewLabel = new JLabel("Giriş yapın");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(170, 11, 112, 35);
-		panel.add(lblNewLabel);
-		
+
+		// --- Kullanıcı adı ve şifre
 		textName = new JTextField();
 		textName.setColumns(10);
 		textName.setBounds(170, 57, 112, 20);
@@ -81,6 +71,22 @@ public class Login extends JFrame {
 		passwordField.setBounds(170, 89, 112, 20);
 		panel.add(passwordField);
 		
+		// --- Etiketler
+		
+		JLabel lblNewLabel = new JLabel("Giriş yapın");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(170, 11, 112, 35);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/proje/supermarket (3).png")));
+		lblNewLabel_1.setBounds(334, -93, 575, 376);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblAlert = new JLabel("");
+		lblAlert.setForeground(new Color(255, 0, 0));
+		lblAlert.setBounds(129, 68, 187, 26);
+		contentPane.add(lblAlert);
 		
 		JLabel Label_Isim = new JLabel("İsim");
 		Label_Isim.setIcon(new ImageIcon(Login.class.getResource("/proje/profile.png")));
@@ -94,15 +100,20 @@ public class Login extends JFrame {
 		lblNewLabel_2.setBounds(23, 91, 97, 17);
 		panel.add(lblNewLabel_2);
 		
+		// --- Buton
+		
+		
 		JButton btnNewButton = new JButton("Giriş");
 		btnNewButton.setBackground(new Color(153, 153, 204));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// İsim ve şifre doğru mu kontrolu
 				if (textName.getText().equals("Admin") && passwordField.getText().equals("123")) {
 					AdminPanel adminPanel = new AdminPanel();
 					adminPanel.setVisible(true);
 					dispose();
 				}
+				// Yanlış ise uyarı göster
 				else {
 					lblAlert.setText("Yanlış kullanıcı adı veye şifre");
 				}
@@ -111,13 +122,6 @@ public class Login extends JFrame {
 		});
 		btnNewButton.setBounds(170, 131, 112, 35);
 		panel.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/proje/supermarket (3).png")));
-		lblNewLabel_1.setBounds(334, -93, 575, 376);
-		panel.add(lblNewLabel_1);
-		
-		
 
 		
 	}
