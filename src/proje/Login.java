@@ -84,6 +84,7 @@ public class Login extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblAlert = new JLabel("");
+		
 		lblAlert.setForeground(new Color(255, 0, 0));
 		lblAlert.setBounds(129, 68, 187, 26);
 		contentPane.add(lblAlert);

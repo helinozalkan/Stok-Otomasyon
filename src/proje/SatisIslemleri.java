@@ -197,8 +197,13 @@ public class SatisIslemleri extends JFrame {
         contentPane.add(btnAdd);
 
         JButton btnGeriDön = new JButton("Geri Dön");
-        btnGeriDön.addActionListener(e -> {
-            dispose();
+        btnGeriDön.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Yeni sayfayı aç ve şuan ki sayfayı kapa
+				AdminPanel aPanel = new AdminPanel();
+				aPanel.setVisible(true);
+				dispose();
+			}
         });
         btnGeriDön.setBounds(10, 11, 89, 23);
         contentPane.add(btnGeriDön);
